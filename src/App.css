@@ -1,0 +1,19 @@
+body {
+  background-image: url('/src/assets/img1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+.app-container {
+  font-family: Arial, sans-serif;
+  padding: 1rem;
+  position: absolute;   /* Allows precise placement */
+  top: 50%;             /* Moves the container halfway down the page */
+  left: 50%;            /* Moves the container halfway across the page */
+  transform: translate(-50%, -50%); /* Adjusts for the container's own size */
+  background-color: #05090e; /* Optional: Adds background for aesthetics */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds depth */
+  border-radius: 8px;   /* Optional: Smooth edges for style */
+  width: 80%;           /* Optional: Adjust width for responsiveness */
+  max-width: 500px;     /* Optional: Ensures consistent sizing on larger screens */
+}
