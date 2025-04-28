@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import "./LoginPage.css";
+
 import axios from 'axios'; 
 
 
@@ -7,7 +9,7 @@ function LoginPage({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage,setErrorMessage] = useState('');
-  
+  const navigate = useNavigate(); 
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -25,8 +27,7 @@ function LoginPage({ onLogin }) {
       if (response.data.length > 0) {
   
         onLogin(response.data[0]); 
-        
-        alert('Ok!')
+        navigate('/');
         
       } else {
         setErrorMessage('->Invalid credentials. Try again.<-');  
@@ -39,6 +40,7 @@ function LoginPage({ onLogin }) {
   }
 
   return (
+    <div className="app-container">
     <div className="login-page">
       <h2>Login to To Do</h2>
       <p className="information-p1">Welcome! Please, enter your username and password to log in.📝</p>
@@ -64,6 +66,7 @@ function LoginPage({ onLogin }) {
         <button type="submit" className='register-button'>Register</button>
         </div>
       </form>
+    </div>
     </div>
   );
 }

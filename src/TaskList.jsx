@@ -11,6 +11,7 @@ function TaskList({ view, tasks, toggleTask, deleteTask }) {
   });
 
   return (
+    <div className="">
     <ul className="task-list">
       {filteredTasks.map((task) => (
         <li key={task.id} className="task-item">
@@ -26,6 +27,7 @@ function TaskList({ view, tasks, toggleTask, deleteTask }) {
         </li>
       ))}
     </ul>
+    </div>
   );
 }
 

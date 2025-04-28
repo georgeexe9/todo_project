@@ -8,20 +8,6 @@ body {
   align-items: center;
 }
 
-.login-container {
-  background-color: #0d0d0d; 
-  border-radius: 12px; 
-  padding: 2rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); 
-  width: 90%;
-  max-width: 400px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-
 .login-form {
   width: 100%;
   display: flex;
@@ -86,9 +72,26 @@ body {
 }
 
 .information-p1 {
+  
   font-size: 16px;
-  color: #ccc;
-  text-align: center;
+  color: #ffffff;
+  text-align: left;
   margin-bottom: 1rem;
+}
+.app-container {
+  font-family: Arial, sans-serif;
+  padding: 1rem;
+  position: absolute;  
+  top: 50%;            
+  left: 50%;            
+  transform: translate(-50%, -50%);
+  background-color: #20344d;
+  opacity: 90%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 40cm;
+  border-radius: 8px;   
+  width:  80%;           
+  max-width: 500px;
+  opacity: 10px; 
 }
 
