@@ -4,6 +4,7 @@
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    padding-bottom: 10px;
   }
   
   .task-item {
@@ -13,10 +14,10 @@
     justify-content: space-between;
     align-items: center;
     background-color: #f1f1f1;
-    padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
     word-break: break-word;
+    padding: 12px 16px;
   }
   
   .task-item span {
@@ -24,6 +25,7 @@
     font-size: 16px;
     color: #333;
     word-wrap: break-word;
+    
   }
   
   .delete-button {

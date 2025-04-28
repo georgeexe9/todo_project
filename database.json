@@ -2,7 +2,7 @@
   "users": [
     { "id": 1, "username": "admin", "password": "123456" },
     { "id": 2, "username": "george", "password": "123456" },
-    { "id": 2, "username": "george", "password": "Lavgeorge%09" }
+    { "id": 2, "username": "george", "password": "george12" }
     
   ],
   "tasks": [

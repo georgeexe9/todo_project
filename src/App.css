@@ -13,7 +13,9 @@ body {
   transform: translate(-50%, -50%);
   background-color: #05090e;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 40cm;
   border-radius: 8px;   
   width:  80%;           
-  max-width: 500px;     
+  max-width: 500px;
+  opacity: 10px; 
 }

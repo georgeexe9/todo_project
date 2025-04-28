@@ -7,25 +7,17 @@ function LoginPage({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage,setErrorMessage] = useState('');
+  
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (password.length && username.trim() === '') {
-      setErrorMessage('Please, username and password are required!');
-      return;
-    }
-    if(username.trim() === '') {
-      setErrorMessage('Username is required!');
-      return;
-    }
-    if (password.trim() ==='') {
-      setErrorMessage('Password is required!');
-    }
-    if(password.length < 6) {
-      setErrorMessage('Password must be at least 6 characters long!');
-      return;
-    }
+    if (username.trim === 0 || password.length === 0) 
+      {
+        setErrorMessage('Please, enter username and password!')
+      }
+      
+    else {
     
     try {
       const response = await axios.get(`http://localhost:8000/users?username=${username}&password=${password}`);
@@ -33,12 +25,17 @@ function LoginPage({ onLogin }) {
       if (response.data.length > 0) {
   
         onLogin(response.data[0]); 
+        
+        alert('Ok!')
+        
       } else {
-        alert('Invalid credentials. Try again.');
+        setErrorMessage('->Invalid credentials. Try again.<-');  
       }
     } catch (error) {
       console.error('Error during login:', error);
     }
+
+  }
   }
 
   return (
@@ -61,8 +58,11 @@ function LoginPage({ onLogin }) {
           onChange={(e) => setPassword(e.target.value)}
          
         />
+        <p className='p2-text'>Still don't have account? Register below!</p>
+        <div className='buttons'>
         <button type="submit">Login</button>
-        
+        <button type="submit" className='register-button'>Register</button>
+        </div>
       </form>
     </div>
   );

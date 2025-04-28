@@ -9,9 +9,12 @@ import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([
-    { "id": 1, "text": "Welcome, first note!", "completed": false }
+    { "id": 1, "text": "Welcome, first note!", "completed": false },
+    { "id": 2, "text": "Finish all your projects", "completed": false },
+    { "id": 3, "text": "Buy new a phone", "completed": false }
   ]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoggedOff, setIsLoggedOff] = useState(false);
   
 //add logoff func later maybe
   function addTask(text) {
@@ -38,6 +41,7 @@ function App() {
   function handleLogin(user) {
     setCurrentUser(user);
     localStorage.setItem('currentUser', JSON.stringify(user));
+    setIsLoggedOff(false);
   }
 
   function handleLogout() {
@@ -50,7 +54,13 @@ function App() {
     if (user) {
       setCurrentUser(user);
     }
+    
   }, []);
+
+  if (isLoggedOff) {
+    return <LoginPage />;
+  }
+  
 
   if (!currentUser) {
     return <LoginPage onLogin={handleLogin} />;
@@ -75,7 +85,7 @@ function App() {
             <Route
               path="/uncompleted"
               element={<TaskList view="uncompleted" tasks={tasks} toggleTask={toggleTask} deleteTask={deleteTask} />}
-            />
+            />           
           </Routes>
         </div>
       </div>

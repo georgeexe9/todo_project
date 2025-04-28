@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ onLogout }) => {
   const getClassName = (isActive) => {
     if (isActive) {
       return "nav-item active";
@@ -29,8 +29,12 @@ const Navbar = () => {
             Uncompleted
           </NavLink>
         </li>
-        
-        <li className="nav-item disabled">Coming Soon</li>
+        <li>
+          <NavLink onClick={onLogout} className={({ isActive }) => getClassName(isActive)}>
+          Logoff
+          </NavLink>
+        </li>
+    
       </ul>
     </nav>
   );

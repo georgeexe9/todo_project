@@ -3,8 +3,10 @@ import "./TaskList.css";
 
 function TaskList({ view, tasks, toggleTask, deleteTask }) {
   const filteredTasks = tasks.filter((task) => {
-    if (view === "completed") return task.completed;
-    if (view === "uncompleted") return !task.completed;
+    if (view === "completed") {
+      return task.completed;}
+    if (view === "uncompleted") { 
+      return !task.completed; }
     return true; 
   });
 
