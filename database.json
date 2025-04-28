@@ -1,0 +1,11 @@
+{
+  "users": [
+    { "id": 1, "username": "admin", "password": "123456" },
+    { "id": 2, "username": "george", "password": "123456" },
+    { "id": 2, "username": "george", "password": "Lavgeorge%09" }
+    
+  ],
+  "tasks": [
+    { "id": 1, "text": "Finish your react project due 20 May", "completed": false }
+  ]
+}

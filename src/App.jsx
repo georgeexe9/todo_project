@@ -1,20 +1,19 @@
-import { useState } from 'react'
-import Navbar from './Navbar'
+import { useState, useEffect } from 'react';
+import Navbar from './Navbar';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import TaskForm from './TaskForm';
 import TaskList from './TaskList';
-import Header from './Header'
+import Header from './Header';
+import LoginPage from './LoginPage';
 import "./App.css";
 
-
-
 function App() {
-
-  const [tasks,setTasks] = useState([
-    {id:1, text:"Finish your react project due 20 May", completed: false},
-    {id: 2, text:"Finish your c# project due 1 june", completed: false},
-    {id: 3, text:"Register due 10 september", completed: false},
+  const [tasks, setTasks] = useState([
+    { "id": 1, "text": "Welcome, first note!", "completed": false }
   ]);
+  const [currentUser, setCurrentUser] = useState(null);
+  
+//add logoff func later maybe
   function addTask(text) {
     const newTask = {
       id: Date.now(),
@@ -23,6 +22,7 @@ function App() {
     };
     setTasks((prev) => [newTask, ...prev]);
   }
+
   function toggleTask(id) {
     setTasks((prev) =>
       prev.map((task) =>
@@ -30,19 +30,40 @@ function App() {
       )
     );
   }
+
   function deleteTask(id) {
     setTasks((prev) => prev.filter((task) => task.id !== id));
+  }
+
+  function handleLogin(user) {
+    setCurrentUser(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  function handleLogout() {
+    setCurrentUser(null);
+    localStorage.removeItem('currentUser');
+  }
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  if (!currentUser) {
+    return <LoginPage onLogin={handleLogin} />;
   }
 
   return (
     <Router>
       <div className="app-container">
-        <Navbar />
+        <Navbar onLogout={handleLogout} />
         <div className="task-wrapper">
-        <Header></Header>
-        <TaskForm addTask={addTask} />
-        
-        <Routes>
+          <Header />
+          <TaskForm addTask={addTask} />
+          <Routes>
             <Route
               path="/"
               element={<TaskList view="todo" tasks={tasks} toggleTask={toggleTask} deleteTask={deleteTask} />}
@@ -62,4 +83,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
