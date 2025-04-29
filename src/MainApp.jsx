@@ -1,48 +1,110 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
-import { useState } from "react";
-import './MainApp.css'
+import { useState, useEffect } from "react";
+import './MainApp.css';
 
-function MainApp({ onLogout }) {
-  const [tasks, setTasks] = useState([
-    { id: 1, text: "Welcome, first note!", completed: false },
-    { id: 2, text: "Finish all your projects", completed: false },
-    { id: 3, text: "Buy a new phone", completed: false }
-  ]);
+function MainApp() {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+  useEffect(() => {
+    fetch('http://localhost:8000/tasks')
+      .then((response) => response.json())
+      .then((data) => {
+        setTasks(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
 
   function addTask(text) {
-    const newTask = { id: Date.now(), text, completed: false };
-    setTasks(prev => [newTask, ...prev]);
+    const newTask = { text, completed: false };
+
+    fetch('http://localhost:8000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTask),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setTasks(prev => [data, ...prev]);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   }
 
   function toggleTask(id) {
-    setTasks(prev => prev.map(task =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+    const taskToUpdate = tasks.find(task => task.id === id);
+    const updatedTask = { ...taskToUpdate, completed: !taskToUpdate.completed };
+
+    fetch(`http://localhost:8000/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedTask),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setTasks(prev => prev.map(task =>
+          task.id === id ? data : task
+        ));
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   }
 
   function deleteTask(id) {
-    setTasks(prev => prev.filter(task => task.id !== id));
+    fetch(`http://localhost:8000/tasks/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        setTasks(prev => prev.filter(task => task.id !== id));
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   }
+  const onLogout = () => {
+    setUser(null);
+  };
+
+
 
   return (
-    <>
     <div className="app-container">
       <Navbar onLogout={onLogout} />
       <div className="task-wrapper">
         <Header />
         <TaskForm addTask={addTask} />
         <Routes>
-          <Route path="/" element={<TaskList view="todo" tasks={tasks} toggleTask={toggleTask} deleteTask={deleteTask} />} />
-          <Route path="/completed" element={<TaskList view="completed" tasks={tasks} toggleTask={toggleTask} deleteTask={deleteTask} />} />
-          <Route path="/uncompleted" element={<TaskList view="uncompleted" tasks={tasks} toggleTask={toggleTask} deleteTask={deleteTask} />} />
+          <Route
+            path="/"
+            element={<TaskList view="todo" tasks={tasks.filter(task => !task.completed)} toggleTask={toggleTask} deleteTask={deleteTask} />}
+          />
+          <Route
+            path="/completed"
+            element={<TaskList view="completed" tasks={tasks.filter(task => task.completed)} toggleTask={toggleTask} deleteTask={deleteTask} />}
+          />
+          <Route
+            path="/uncompleted"
+            element={<TaskList view="uncompleted" tasks={tasks.filter(task => !task.completed)} toggleTask={toggleTask} deleteTask={deleteTask} />}
+          />
         </Routes>
       </div>
-      </div>
-    </>
+    </div>
   );
 }
 

@@ -1,11 +1,32 @@
 {
   "users": [
-    { "id": 1, "username": "admin", "password": "123456" },
-    { "id": 2, "username": "george", "password": "123456" },
-    { "id": 2, "username": "george", "password": "george12" }
-    
+    {
+      "id": 1,
+      "username": "george",
+      "password": "lavgeorge%09"
+    }
   ],
   "tasks": [
-    { "id": 1, "text": "Finish your react project due 20 May", "completed": false }
+    {
+      "id": 1,
+      "text": "Hello World",
+      "completed": false,
+      "userId": 1
+    },
+    {
+      "id": "396b",
+      "text": "fedeg",
+      "completed": false
+    },
+    {
+      "id": "00f8",
+      "text": "gedsrdhfb",
+      "completed": false
+    },
+    {
+      "id": "562b",
+      "text": "saw",
+      "completed": false
+    }
   ]
 }
