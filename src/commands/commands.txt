@@ -1,0 +1,2 @@
+1. npm run dev
+2. json-server --watch database.json --port 8000

@@ -7,8 +7,17 @@ import MainApp from "./MainApp";
 function App() {
   const [user, setUser] = useState(null);
 
-  function handleLogin(loggedInUser) {
-    setUser(loggedInUser);
+  function handleLogin(user) {
+    
+    fetch(`http://localhost:8000/users/${user.id}`)
+      .then(res => res.json())
+      .then(fullUser => {
+        setUser(fullUser);;
+        localStorage.setItem('currentUser', JSON.stringify(fullUser));
+      })
+      .catch(error => {
+        console.error('Error fetching full user data:', error);
+      });
   }
 
   function handleLogout() {

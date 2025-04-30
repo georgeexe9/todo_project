@@ -8,7 +8,6 @@ import './MainApp.css';
 
 function MainApp({user}) {
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
 
