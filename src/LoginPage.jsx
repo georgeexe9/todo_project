@@ -40,6 +40,10 @@ function LoginPage({ onLogin }) {
       });
   };
 
+  const handleRegisterRedirect = () => {
+    navigate('/register'); 
+  };
+
   return (
     <div className="app-container">
       <div className="login-page">
@@ -62,7 +66,7 @@ function LoginPage({ onLogin }) {
           <p className="p2-text">Still don't have an account? Register below!</p>
           <div className="buttons">
             <button type="submit">Login</button>
-            <button type="button" className="register-button" onClick={() => navigate('/register')}>
+            <button type="button" className="register-button" onClick={handleRegisterRedirect}>
               Register
             </button>
           </div>

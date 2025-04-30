@@ -6,27 +6,26 @@ import TaskList from "./TaskList";
 import { useState, useEffect } from "react";
 import './MainApp.css';
 
-function MainApp() {
+function MainApp({user}) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
 
   useEffect(() => {
-    fetch('http://localhost:8000/tasks')
-      .then((response) => response.json())
-      .then((data) => {
-        setTasks(data);
-        setLoading(false);
+    fetch("http://localhost:8000/tasks")
+      .then(res => res.json())
+      .then(data => {
+        //филтриране
+        const userTasks = data.filter(task => task.userId === user.id);
+        setTasks(userTasks);
       })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
-  }, []);
+      .catch(err => console.error("Error loading tasks:", err));
+  }, [user.id]);
+  
 
   function addTask(text) {
-    const newTask = { text, completed: false };
+    const newTask = { text, completed: false, userId: user.id};
 
     fetch('http://localhost:8000/tasks', {
       method: 'POST',
@@ -80,7 +79,6 @@ function MainApp() {
   const onLogout = () => {
     setUser(null);
   };
-
 
 
   return (

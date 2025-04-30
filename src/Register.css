@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: black;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.register-page h2 {
+color: white;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 30px;
+}
+
+.register-page input {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 16px;
+}
+.register-page button {
+    padding: 0.75rem;
+    background-color: #0a84ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+
+  .register-page button:hover {
+    background-color: #005bb5;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 20px;
+    
+  }
+  .app-container-register {
+    font-family: Arial, sans-serif;
+    padding: 1rem;
+    position: absolute;  
+    top: 50%;            
+    left: 50%;            
+    transform: translate(-50%, -50%);
+    background-color: #000000;
+    opacity: 90%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 40cm;
+    border-radius: 8px;   
+    width:  80%;           
+    max-width: 500px;
+    opacity: 10px; 
+}
