@@ -8,37 +8,34 @@ function LoginPage({ onLogin }) {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (username.trim().length === 0 || password.length === 0) {
       setErrorMessage('Please, enter username and password!');
       return;
     }
-
-    fetch('http://localhost:8000/users')
-      .then((response) => {
-        console.log('Response:', response);  
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((users) => {
-        console.log('Users:', users); 
-        const user = users.find((user) => user.username === username && user.password === password);
-        if (user) {
-          onLogin(user);
-          navigate('/');
-        } else {
-          setErrorMessage('-> Invalid credentials. Try again. <-');
-        }
-      })
-      .catch((error) => {
-        console.error('Error during login:', error);
-        setErrorMessage('Something went wrong, please try again later.');
-      });
+  
+    try {
+      const response = await fetch('http://localhost:8000/users');
+      const users = await response.json();
+  
+      const user = users.find(
+        (user) => user.username === username && user.password === password
+      );
+  
+      if (user) {
+        await onLogin(user); 
+        navigate('/');
+      } else {
+        setErrorMessage('-> Invalid credentials. Try again. <-');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      setErrorMessage('Something went wrong, please try again later.');
+    }
   };
+  
 
   const handleRegisterRedirect = () => {
     navigate('/register'); 
@@ -47,8 +44,8 @@ function LoginPage({ onLogin }) {
   return (
     <div className="app-container">
       <div className="login-page">
-        <h2>Login to To Do</h2>
-        <p className="information-p1">Welcome! Please, enter your username and password to log in.📝</p>
+        <h2>Login</h2>
+        <p className="information-p1">Welcome! To Do helps you takes great notes! Please, log in!📝</p>
         <form onSubmit={handleSubmit} className="login-form">
           {errorMessage && <p className="error-message">{errorMessage}</p>}
           <input
@@ -67,12 +64,13 @@ function LoginPage({ onLogin }) {
           <div className="buttons">
             <button type="submit">Login</button>
             <button type="button" className="register-button" onClick={handleRegisterRedirect}>
-              Register
+              Sign up
             </button>
           </div>
         </form>
       </div>
     </div>
+    
   );
 }
 

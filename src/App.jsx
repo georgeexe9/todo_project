@@ -8,15 +8,11 @@ function App() {
   const [user, setUser] = useState(null);
 
   function handleLogin(user) {
-    
-    fetch(`http://localhost:8000/users/${user.id}`)
+    return fetch(`http://localhost:8000/users/${user.id}`)
       .then(res => res.json())
       .then(fullUser => {
-        setUser(fullUser);;
+        setUser(fullUser);
         localStorage.setItem('currentUser', JSON.stringify(fullUser));
-      })
-      .catch(error => {
-        console.error('Error fetching full user data:', error);
       });
   }
 

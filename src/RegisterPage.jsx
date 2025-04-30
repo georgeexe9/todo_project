@@ -43,32 +43,55 @@ function RegisterPage() {
         setErrorMessage('Something went wrong, please try again later.');
       });
   };
+  function goTologin() {
+    navigate('/login');
+  }
 
   return (
     <div className="app-container">
       <div className="register-page">
-        <h2>Register</h2>
+        <h2>Sign up</h2>
+        <div className='info'>
+        <p>To start your notes with To Do, please create account below:</p>
+        </div>
         <form onSubmit={handleSubmit} className="register-form">
           {errorMessage && <p className="error-message">{errorMessage}</p>}
+          <br></br>
+          <div className='div-register'>
+          <p>Enter username:</p>
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          </div>
+          <br></br>
+          <div className='div-register'>
+          <p>Password:</p>
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          </div>
+          <br></br>
+          <div className='div-register'>
+          <p>Confirm Password:</p>
           <input
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          </div>
+          <br></br>
+          <br></br>
+          <div className='buttons-register'>
           <button type="submit">Register</button>
+          <button type="submit" onClick={goTologin}>Have an account?</button>
+          </div>
         </form>
       </div>
     </div>
