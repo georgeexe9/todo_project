@@ -9,3 +9,9 @@
  .h3 {
     text-align: center;
  }
+
+ .about-aboutpage p {
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+ }

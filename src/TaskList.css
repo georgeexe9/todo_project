@@ -48,4 +48,8 @@
     font-style: bold;
     color: #777;
   }
+  .task-list img {
+    display: block;
+    margin: auto;
+  }
   

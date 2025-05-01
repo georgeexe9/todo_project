@@ -1,5 +1,6 @@
 import React from "react";
 import "./TaskList.css";
+import icon from './assets/icon1.png'
 
 function TaskList({ view, tasks, toggleTask, deleteTask }) {
   const filteredTasks = tasks.filter((task) => {
@@ -14,6 +15,7 @@ function TaskList({ view, tasks, toggleTask, deleteTask }) {
   if (!filteredTasks || filteredTasks.length === 0) {
     return <div className="task-list">
       <p className="no-tasks-message">There are no notes to be displayed...</p>
+      <img src={icon} alt="alt"/>
     </div>
   }
   
