@@ -41,4 +41,11 @@
   .delete-button:hover {
     background-color: #21a1f1;
   }
+
+  .no-tasks-message {
+    text-align: center;
+    margin-top: 20px;
+    font-style: bold;
+    color: #777;
+  }
   

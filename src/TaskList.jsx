@@ -10,6 +10,15 @@ function TaskList({ view, tasks, toggleTask, deleteTask }) {
     return true; 
   });
 
+
+  if (!filteredTasks || filteredTasks.length === 0) {
+    return <div className="task-list">
+      <p className="no-tasks-message">There are no notes to be displayed...</p>
+    </div>
+  }
+  
+  
+
   return (
     <div className="">
     <ul className="task-list">

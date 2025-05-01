@@ -23,6 +23,8 @@ function MainApp({user}) {
   }, [user.id]);
   
 
+  
+
   function addTask(text) {
     const newTask = { text, completed: false, userId: user.id};
 
@@ -84,7 +86,7 @@ function MainApp({user}) {
     <div className="app-container">
       <Navbar onLogout={onLogout} />
       <div className="task-wrapper">
-        <Header />
+        <Header currentUser={user}/>
         <TaskForm addTask={addTask} />
         <Routes>
           <Route

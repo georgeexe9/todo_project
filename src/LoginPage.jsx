@@ -10,9 +10,17 @@ function LoginPage({ onLogin }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (username.trim().length === 0 || password.length === 0) {
-      setErrorMessage('Please, enter username and password!');
+      setErrorMessage('Please, enter your username and password');
+      return;
+    }
+    if (username.trim().length === 0) {
+      setErrorMessage('Please, enter username');
+      return;
+    }
+    if (password.length === 0) {
+      setErrorMessage('Please, enter your password')
       return;
     }
   
@@ -30,13 +38,13 @@ function LoginPage({ onLogin }) {
       } else {
         setErrorMessage('-> Invalid credentials. Try again. <-');
       }
+      
     } catch (error) {
       console.error('Error during login:', error);
       setErrorMessage('Something went wrong, please try again later.');
     }
   };
   
-
   const handleRegisterRedirect = () => {
     navigate('/register'); 
   };
@@ -45,7 +53,7 @@ function LoginPage({ onLogin }) {
     <div className="app-container">
       <div className="login-page">
         <h2>Login</h2>
-        <p className="information-p1">Welcome! To Do helps you takes great notes! Please, log in!📝</p>
+        <p className="information-p1">Welcome ! To Do helps you takes great notes! Please, log in!📝</p>
         <form onSubmit={handleSubmit} className="login-form">
           {errorMessage && <p className="error-message">{errorMessage}</p>}
           <input
