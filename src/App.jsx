@@ -24,6 +24,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
       <Route path="/register" element={<RegisterPage />} />
+     
       <Route
         path="/*"
         element={
@@ -34,6 +35,8 @@ function App() {
           )
         }
       />
+
+      
     </Routes>
   );
 }

@@ -3,14 +3,16 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
+import AboutPage from "./AboutPage";
 import { useState, useEffect } from "react";
 import './MainApp.css';
 
 function MainApp({user}) {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
+  const [showAbout, setShowAbout] = useState(false);
 
-
+  const toggleAbout = () => setShowAbout(!showAbout);
   useEffect(() => {
     fetch("http://localhost:8000/tasks")
       .then(res => res.json())
@@ -101,7 +103,9 @@ function MainApp({user}) {
             path="/uncompleted"
             element={<TaskList view="uncompleted" tasks={tasks.filter(task => !task.completed)} toggleTask={toggleTask} deleteTask={deleteTask} />}
           />
+          <Route path="/about" onClick={toggleAbout} element={<AboutPage />} />
         </Routes>
+        {showAbout && <AboutPage />}
       </div>
     </div>
   );

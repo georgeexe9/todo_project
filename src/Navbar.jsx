@@ -30,10 +30,14 @@ const Navbar = ({ onLogout }) => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/about" className={({ isActive }) => getClassName(isActive)}>About</NavLink>
+        </li>
+        <li>
           <NavLink onClick={onLogout} className={({ isActive }) => getClassName(isActive)}>
           Logoff
           </NavLink>
         </li>
+        
     
       </ul>
     </nav>
